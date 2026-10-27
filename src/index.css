@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    margin: 0;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ============================================================
+   PRINT STYLES FOR PHARMACY BILLING (MULTIPLE TEMPLATES)
+   ============================================================ */
+@media print {
+  /* Hide all app chrome */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Only make print-container and its descendants visible */
+  #printable-invoice, #printable-invoice * {
+    visibility: visible;
+  }
+
+  #printable-invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove page margin headers/footers default by browser */
+  @page {
+    margin: 6mm;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Specific template sizing for print page */
+  .print-thermal-80 {
+    width: 78mm !important;
+    max-width: 78mm !important;
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+    padding: 2mm !important;
+  }
+
+  .print-thermal-58 {
+    width: 56mm !important;
+    max-width: 56mm !important;
+    font-size: 9.5px !important;
+    line-height: 1.2 !important;
+    padding: 1.5mm !important;
+  }
+
+  .print-a4 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .print-a5 {
+    width: 100% !important;
+    max-width: 148mm !important;
+  }
+}
