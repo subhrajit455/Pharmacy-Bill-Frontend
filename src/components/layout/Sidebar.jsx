@@ -9,8 +9,8 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
-  Cross,
   UserCheck,
+  Percent,
 } from 'lucide-react';
 
 export default function Sidebar({
@@ -22,6 +22,8 @@ export default function Sidebar({
   setIsOpenMobile,
   alerts,
   store,
+  gstEnabled = true,
+  onToggleGst,
 }) {
   const navItems = [
     {
@@ -87,8 +89,9 @@ export default function Sidebar({
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:static top-0 bottom-0 left-0 z-50 bg-slate-900 text-slate-200 flex flex-col transition-all duration-300 ease-in-out border-r border-slate-800 no-print ${isCollapsed ? 'w-20' : 'w-64'
-          } ${isOpenMobile ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+        className={`fixed lg:static top-0 bottom-0 left-0 z-50 bg-slate-900 text-slate-200 flex flex-col transition-all duration-300 ease-in-out border-r border-slate-800 no-print ${
+          isCollapsed ? 'w-20' : 'w-64'
+        } ${isOpenMobile ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
       >
         {/* Brand Header */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
@@ -125,10 +128,11 @@ export default function Sidebar({
                 key={item.id}
                 onClick={() => handleSelectRoute(item.id)}
                 title={isCollapsed ? item.label : undefined}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  isActive
                     ? 'bg-teal-600 text-white shadow-lg shadow-teal-900/40'
                     : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/80'
-                  } ${isCollapsed ? 'justify-center px-0' : ''}`}
+                } ${isCollapsed ? 'justify-center px-0' : ''}`}
               >
                 <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                 {!isCollapsed && (
@@ -136,8 +140,9 @@ export default function Sidebar({
                     <span className="flex-1 text-left truncate">{item.label}</span>
                     {item.badge && (
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${item.badgeColor || 'bg-slate-700 text-slate-300'
-                          }`}
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                          item.badgeColor || 'bg-slate-700 text-slate-300'
+                        }`}
                       >
                         {item.badge}
                       </span>
@@ -147,6 +152,91 @@ export default function Sidebar({
               </button>
             );
           })}
+
+          {/* GST ON / OFF Toggle Control in Sidebar */}
+          <div className="pt-3 mt-3 border-t border-slate-800">
+            {!isCollapsed ? (
+              <div className="p-3 rounded-xl bg-slate-800/70 border border-slate-700/70 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+                        gstEnabled
+                          ? 'bg-emerald-500/20 text-emerald-400'
+                          : 'bg-slate-700 text-slate-400'
+                      }`}
+                    >
+                      <Percent className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white leading-tight">GST Tax</div>
+                      <div className="text-[10px] text-slate-400">
+                        {gstEnabled ? 'Applied on Bills' : 'GST Disabled (0%)'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pill Switch */}
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={gstEnabled}
+                    onClick={() => onToggleGst && onToggleGst(!gstEnabled)}
+                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                      gstEnabled ? 'bg-emerald-500' : 'bg-slate-600'
+                    }`}
+                    title={gstEnabled ? 'Click to turn GST OFF' : 'Click to turn GST ON'}
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
+                        gstEnabled ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                {/* Quick ON / OFF segmented buttons */}
+                <div className="grid grid-cols-2 gap-1.5 bg-slate-900/80 p-1 rounded-lg text-[11px] font-bold">
+                  <button
+                    type="button"
+                    onClick={() => onToggleGst && onToggleGst(true)}
+                    className={`py-1 rounded-md transition-all ${
+                      gstEnabled
+                        ? 'bg-emerald-600 text-white shadow-xs'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    GST ON
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onToggleGst && onToggleGst(false)}
+                    className={`py-1 rounded-md transition-all ${
+                      !gstEnabled
+                        ? 'bg-rose-600 text-white shadow-xs'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    GST OFF
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onToggleGst && onToggleGst(!gstEnabled)}
+                title={gstEnabled ? 'GST is ON (Click to turn OFF)' : 'GST is OFF (Click to turn ON)'}
+                className={`w-full flex flex-col items-center justify-center py-2.5 rounded-xl border text-[10px] font-bold transition-all ${
+                  gstEnabled
+                    ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400'
+                    : 'bg-slate-800/80 border-slate-700 text-slate-400'
+                }`}
+              >
+                <Percent className="w-4 h-4 mb-0.5" />
+                <span>{gstEnabled ? 'ON' : 'OFF'}</span>
+              </button>
+            )}
+          </div>
         </nav>
 
         {/* Pharmacist On-Duty Footer */}
@@ -171,4 +261,3 @@ export default function Sidebar({
     </>
   );
 }
-

@@ -1,7 +1,21 @@
 import axios from 'axios';
 
+const rawBaseUrl = (
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  'https://pharmacy-bill-backend.onrender.com'
+)
+  .trim()
+  .replace(/\/+$/, '');
+
+const BASE_URL = import.meta.env.DEV
+  ? '/api'
+  : rawBaseUrl.endsWith('/api')
+    ? rawBaseUrl
+    : `${rawBaseUrl}/api`;
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -52,4 +66,3 @@ export const seedApi = {
 };
 
 export default API;
-

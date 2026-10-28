@@ -16,6 +16,18 @@ export default function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
+  // Global GST ON / OFF state persisted in localStorage
+  const [gstEnabled, setGstEnabled] = useState(() => {
+    const saved = localStorage.getItem('pharma_gst_enabled');
+    return saved !== null ? saved === 'true' : true;
+  });
+
+  const handleToggleGst = (val) => {
+    const nextVal = typeof val === 'boolean' ? val : !gstEnabled;
+    setGstEnabled(nextVal);
+    localStorage.setItem('pharma_gst_enabled', String(nextVal));
+  };
+
   // Global settings & alerts
   const [store, setStore] = useState(null);
   const [alerts, setAlerts] = useState(null);
@@ -72,6 +84,8 @@ export default function App() {
         setIsOpenMobile={setIsMobileSidebarOpen}
         alerts={alerts}
         store={store}
+        gstEnabled={gstEnabled}
+        onToggleGst={handleToggleGst}
       />
 
       {/* Main Content Area */}
@@ -101,6 +115,8 @@ export default function App() {
             {currentRoute === 'billing' && (
               <BillingPOS
                 store={store}
+                gstEnabled={gstEnabled}
+                onToggleGst={handleToggleGst}
                 onInvoiceCreated={(newInvoice) => {
                   fetchGlobalData();
                   handleOpenPrintModal(newInvoice);
