@@ -216,7 +216,7 @@ export default function Inventory({ onRefreshAlerts, onSeedData }) {
             className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 bg-navy-900 hover:bg-navy-800 text-beige-50 font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all cursor-pointer border border-navy-700"
           >
             <Camera className="w-4 h-4 text-beige-300" />
-            <span>Scan Invoice (Camera)</span>
+            <span>Scan Medicine (Camera)</span>
           </button>
 
           <button
@@ -301,7 +301,7 @@ export default function Inventory({ onRefreshAlerts, onSeedData }) {
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-navy-900 text-beige-50 rounded-xl text-xs font-bold hover:bg-navy-800 transition-colors cursor-pointer"
               >
                 <Camera className="w-3.5 h-3.5 text-beige-300" />
-                <span>Scan Invoice via Camera</span>
+                <span>Scan Medicine via Camera</span>
               </button>
               <button
                 onClick={onSeedData}
@@ -361,13 +361,12 @@ export default function Inventory({ onRefreshAlerts, onSeedData }) {
                       <td className="py-3 px-2 text-center">
                         <span className="font-mono text-navy-900 font-bold">{item.batchNo}</span>
                         <div
-                          className={`text-[10px] font-semibold ${
-                            isExpired
+                          className={`text-[10px] font-semibold ${isExpired
                               ? 'text-rose-700 font-bold'
                               : isExpiringSoon
-                              ? 'text-amber-800'
-                              : 'text-navy-500'
-                          }`}
+                                ? 'text-amber-800'
+                                : 'text-navy-500'
+                            }`}
                         >
                           {expDate.toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })}
                           {isExpired && ' (Expired)'}
@@ -385,9 +384,8 @@ export default function Inventory({ onRefreshAlerts, onSeedData }) {
                       </td>
                       <td className="py-3 px-2 text-center">
                         <span
-                          className={`font-black text-sm ${
-                            isOut ? 'text-rose-700' : isLow ? 'text-amber-800' : 'text-navy-900'
-                          }`}
+                          className={`font-black text-sm ${isOut ? 'text-rose-700' : isLow ? 'text-amber-800' : 'text-navy-900'
+                            }`}
                         >
                           {item.stock}
                         </span>
@@ -395,13 +393,12 @@ export default function Inventory({ onRefreshAlerts, onSeedData }) {
                       </td>
                       <td className="py-3 px-2 text-center">
                         <span
-                          className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                            isOut
+                          className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${isOut
                               ? 'bg-rose-100 text-rose-800'
                               : isLow
-                              ? 'bg-amber-100 text-amber-900'
-                              : 'bg-emerald-100 text-emerald-800'
-                          }`}
+                                ? 'bg-amber-100 text-amber-900'
+                                : 'bg-emerald-100 text-emerald-800'
+                            }`}
                         >
                           {isOut ? 'Out of Stock' : isLow ? 'Low Stock' : 'In Stock'}
                         </span>
@@ -717,18 +714,16 @@ export default function Inventory({ onRefreshAlerts, onSeedData }) {
                 <button
                   type="button"
                   onClick={() => setAdjustAction('add')}
-                  className={`flex-1 py-2 rounded-xl font-bold cursor-pointer transition-colors ${
-                    adjustAction === 'add' ? 'bg-navy-900 text-beige-50' : 'bg-beige-200 text-navy-800'
-                  }`}
+                  className={`flex-1 py-2 rounded-xl font-bold cursor-pointer transition-colors ${adjustAction === 'add' ? 'bg-navy-900 text-beige-50' : 'bg-beige-200 text-navy-800'
+                    }`}
                 >
                   + Add Stock
                 </button>
                 <button
                   type="button"
                   onClick={() => setAdjustAction('subtract')}
-                  className={`flex-1 py-2 rounded-xl font-bold cursor-pointer transition-colors ${
-                    adjustAction === 'subtract' ? 'bg-rose-700 text-white' : 'bg-beige-200 text-navy-800'
-                  }`}
+                  className={`flex-1 py-2 rounded-xl font-bold cursor-pointer transition-colors ${adjustAction === 'subtract' ? 'bg-rose-700 text-white' : 'bg-beige-200 text-navy-800'
+                    }`}
                 >
                   - Deduct Stock
                 </button>

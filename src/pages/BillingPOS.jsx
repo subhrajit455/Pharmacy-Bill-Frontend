@@ -339,11 +339,10 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
         <button
           type="button"
           onClick={() => setMobileTab('catalog')}
-          className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-            mobileTab === 'catalog'
+          className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${mobileTab === 'catalog'
               ? 'bg-navy-900 text-beige-50 shadow-sm'
               : 'text-navy-800 hover:bg-beige-150'
-          }`}
+            }`}
         >
           <Pill className="w-3.5 h-3.5" />
           <span>Medicines ({filteredMedicines.length})</span>
@@ -352,11 +351,10 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
         <button
           type="button"
           onClick={() => setMobileTab('cart')}
-          className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-            mobileTab === 'cart'
+          className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${mobileTab === 'cart'
               ? 'bg-navy-900 text-beige-50 shadow-sm'
               : 'text-navy-800 hover:bg-beige-150'
-          }`}
+            }`}
         >
           <ShoppingBag className="w-3.5 h-3.5" />
           <span>Bill & Pay ({cart.length})</span>
@@ -372,9 +370,8 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-start">
         {/* LEFT COLUMN (7 cols): Medicines Catalog & Selected Bill Table */}
         <div
-          className={`lg:col-span-7 xl:col-span-8 space-y-4 lg:space-y-5 ${
-            mobileTab === 'cart' ? 'hidden lg:block' : 'block'
-          }`}
+          className={`lg:col-span-7 xl:col-span-8 space-y-4 lg:space-y-5 ${mobileTab === 'cart' ? 'hidden lg:block' : 'block'
+            }`}
         >
           {/* 1. ALL MEDICINES CATALOG SECTION */}
           <div className="bg-beige-50 rounded-2xl border border-beige-200 shadow-xs overflow-hidden">
@@ -406,7 +403,7 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                     title="Capture supplier invoice via camera to add medicines"
                   >
                     <Camera className="w-3.5 h-3.5 text-beige-400" />
-                    <span>Scan Invoice (Camera)</span>
+                    <span>Scan Medicine (Camera)</span>
                   </button>
 
                   <button
@@ -489,13 +486,12 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                       <div
                         key={item._id}
                         onClick={() => !isOut && addToCart(item)}
-                        className={`group relative rounded-xl p-3 sm:p-3.5 border transition-all flex flex-col justify-between select-none ${
-                          isOut
+                        className={`group relative rounded-xl p-3 sm:p-3.5 border transition-all flex flex-col justify-between select-none ${isOut
                             ? 'bg-beige-100/60 border-beige-200 opacity-60 cursor-not-allowed'
                             : isSelected
-                            ? 'bg-navy-50/90 border-navy-700 ring-2 ring-navy-600/30 cursor-pointer shadow-sm'
-                            : 'bg-white border-beige-200 hover:border-navy-400 hover:shadow-md cursor-pointer'
-                        }`}
+                              ? 'bg-navy-50/90 border-navy-700 ring-2 ring-navy-600/30 cursor-pointer shadow-sm'
+                              : 'bg-white border-beige-200 hover:border-navy-400 hover:shadow-md cursor-pointer'
+                          }`}
                       >
                         {/* Top row: Category Badge & Stock Status */}
                         <div>
@@ -511,13 +507,12 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                             </span>
 
                             <span
-                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
-                                isOut
+                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${isOut
                                   ? 'bg-rose-100 text-rose-800'
                                   : isLow
-                                  ? 'bg-amber-100 text-amber-900'
-                                  : 'bg-emerald-100 text-emerald-800'
-                              }`}
+                                    ? 'bg-amber-100 text-amber-900'
+                                    : 'bg-emerald-100 text-emerald-800'
+                                }`}
                             >
                               {isOut ? 'Out of Stock' : `${item.stock} in Stock`}
                             </span>
@@ -595,11 +590,10 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                                 e.stopPropagation();
                                 if (!isOut) addToCart(item);
                               }}
-                              className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                isOut
+                              className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${isOut
                                   ? 'bg-beige-200 text-navy-400 cursor-not-allowed'
                                   : 'bg-navy-100 text-navy-900 hover:bg-navy-900 hover:text-beige-50 border border-navy-300'
-                              }`}
+                                }`}
                             >
                               <Plus className="w-3.5 h-3.5" />
                               <span>Add</span>
@@ -759,9 +753,8 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
 
         {/* RIGHT COLUMN (5/4 cols): Customer Info & Bill Checkout Panel */}
         <div
-          className={`lg:col-span-5 xl:col-span-4 space-y-3 sm:space-y-4 lg:sticky lg:top-4 ${
-            mobileTab === 'catalog' ? 'hidden lg:block' : 'block'
-          }`}
+          className={`lg:col-span-5 xl:col-span-4 space-y-3 sm:space-y-4 lg:sticky lg:top-4 ${mobileTab === 'catalog' ? 'hidden lg:block' : 'block'
+            }`}
         >
           {/* Customer & Doctor Card */}
           <div className="bg-beige-50 p-4 rounded-2xl border border-beige-200 shadow-xs space-y-3">
@@ -832,11 +825,10 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                     key={m.id}
                     type="button"
                     onClick={() => setPaymentMethod(m.id)}
-                    className={`flex flex-col items-center justify-center p-2 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
-                      isSelected
+                    className={`flex flex-col items-center justify-center p-2 rounded-xl border text-xs font-bold transition-all cursor-pointer ${isSelected
                         ? 'border-navy-900 bg-navy-900 text-beige-50 shadow-sm'
                         : 'border-beige-300 bg-white hover:bg-beige-100 text-navy-800'
-                    }`}
+                      }`}
                   >
                     <Icon className="w-4 h-4 mb-1" />
                     <span>{m.label}</span>
@@ -861,11 +853,10 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                 <span className="flex items-center gap-1.5 font-medium">
                   <span>GST Tax (CGST + SGST):</span>
                   <span
-                    className={`text-[10px] font-black px-1.5 py-0.2 rounded ${
-                      gstEnabled
+                    className={`text-[10px] font-black px-1.5 py-0.2 rounded ${gstEnabled
                         ? 'bg-emerald-100 text-emerald-900'
                         : 'bg-rose-100 text-rose-900'
-                    }`}
+                      }`}
                   >
                     {gstEnabled ? 'ON' : 'OFF'}
                   </span>
@@ -897,22 +888,20 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
                 <button
                   type="button"
                   onClick={() => setPaymentStatus('paid')}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all ${
-                    paymentStatus === 'paid'
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all ${paymentStatus === 'paid'
                       ? 'bg-emerald-700 text-white shadow-xs'
                       : 'bg-beige-200 text-navy-800 hover:bg-beige-300'
-                  }`}
+                    }`}
                 >
                   Fully Paid
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaymentStatus('partial')}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all ${
-                    paymentStatus === 'partial'
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all ${paymentStatus === 'partial'
                       ? 'bg-amber-700 text-white shadow-xs'
                       : 'bg-beige-200 text-navy-800 hover:bg-beige-300'
-                  }`}
+                    }`}
                 >
                   Due / Partial
                 </button>
@@ -943,11 +932,10 @@ export default function BillingPOS({ onInvoiceCreated, store, gstEnabled = true,
             <button
               onClick={handleCheckout}
               disabled={submitting || cart.length === 0}
-              className={`w-full py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer ${
-                submitting || cart.length === 0
+              className={`w-full py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer ${submitting || cart.length === 0
                   ? 'bg-beige-300 cursor-not-allowed text-navy-400'
                   : 'bg-navy-900 hover:bg-navy-800 active:scale-[0.99] text-beige-50 shadow-navy-950/30 border border-navy-700'
-              }`}
+                }`}
             >
               {submitting ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
