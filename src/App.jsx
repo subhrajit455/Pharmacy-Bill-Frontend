@@ -10,6 +10,14 @@ import StockAlerts from './pages/StockAlerts';
 import Settings from './pages/Settings';
 import PrintModal from './components/printing/PrintModal';
 import { settingsApi, itemsApi, seedApi } from './services/api';
+import {
+  ReceiptText,
+  Pill,
+  FileSpreadsheet,
+  AlertOctagon,
+  Menu,
+  LayoutDashboard,
+} from 'lucide-react';
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState('billing'); // default to POS for quick billing
@@ -72,8 +80,10 @@ export default function App() {
     }
   };
 
+  const totalAlertsCount = (alerts?.lowStockCount || 0) + (alerts?.expiredCount || 0);
+
   return (
-    <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
+    <div className="flex h-screen bg-beige-100 overflow-hidden font-sans text-navy-950">
       {/* Sidebar Navigation */}
       <Sidebar
         currentRoute={currentRoute}
@@ -102,7 +112,7 @@ export default function App() {
         />
 
         {/* Scrollable Page Body */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-100/60">
+        <main className="flex-1 overflow-y-auto px-2.5 py-3 sm:p-5 md:p-6 bg-beige-100/90 pb-24 lg:pb-6 touch-scroll">
           <div className="max-w-7xl mx-auto">
             {currentRoute === 'dashboard' && (
               <Dashboard
@@ -146,6 +156,73 @@ export default function App() {
             )}
           </div>
         </main>
+
+        {/* Mobile Bottom Navigation Bar (High UX on smartphones) */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-navy-950/95 backdrop-blur-md border-t border-navy-800/80 px-2 py-1.5 flex items-center justify-around shadow-2xl no-print">
+          <button
+            type="button"
+            onClick={() => setCurrentRoute('billing')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+              currentRoute === 'billing'
+                ? 'text-beige-100 bg-navy-800'
+                : 'text-navy-300 hover:text-beige-200'
+            }`}
+          >
+            <ReceiptText className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] font-bold tracking-tight">New Bill</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentRoute('inventory')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+              currentRoute === 'inventory'
+                ? 'text-beige-100 bg-navy-800'
+                : 'text-navy-300 hover:text-beige-200'
+            }`}
+          >
+            <Pill className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] font-medium tracking-tight">Stock</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentRoute('invoices')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+              currentRoute === 'invoices'
+                ? 'text-beige-100 bg-navy-800'
+                : 'text-navy-300 hover:text-beige-200'
+            }`}
+          >
+            <FileSpreadsheet className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] font-medium tracking-tight">Invoices</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCurrentRoute('alerts')}
+            className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+              currentRoute === 'alerts'
+                ? 'text-beige-100 bg-navy-800'
+                : 'text-navy-300 hover:text-beige-200'
+            }`}
+          >
+            <AlertOctagon className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] font-medium tracking-tight">Alerts</span>
+            {totalAlertsCount > 0 && (
+              <span className="absolute top-0.5 right-2 w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsMobileSidebarOpen(true)}
+            className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-navy-300 hover:text-beige-200 transition-all"
+          >
+            <Menu className="w-5 h-5 mb-0.5" />
+            <span className="text-[10px] font-medium tracking-tight">Menu</span>
+          </button>
+        </div>
       </div>
 
       {/* Multi-Format Print Preview Modal */}

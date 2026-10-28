@@ -4,25 +4,32 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    @apply bg-beige-100 text-navy-950 font-sans antialiased;
     margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar in Navy & Warm Beige */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f7f2ea;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #bbd0e6;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #1e4670;
+}
+
+/* Smooth Touch Scrolling on iOS & Mobile */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ============================================================

@@ -19,10 +19,10 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
   if (!isOpen || !invoice) return null;
 
   const formats = [
-    { id: 'a4', name: 'A4 Full Page', icon: FileText, desc: 'Professional Tax Invoice' },
-    { id: 'thermal-80', name: '80mm Thermal (3")', icon: Receipt, desc: 'Standard POS Receipt' },
-    { id: 'thermal-58', name: '58mm Thermal (2")', icon: Minimize2, desc: 'Compact Mini Roll' },
-    { id: 'a5', name: 'A5 Half Page', icon: FileText, desc: 'Landscape / Half Slip' },
+    { id: 'a4', name: 'A4 Full Page', icon: FileText, desc: 'Tax Invoice' },
+    { id: 'thermal-80', name: '80mm Thermal', icon: Receipt, desc: 'POS Receipt' },
+    { id: 'thermal-58', name: '58mm Thermal', icon: Minimize2, desc: 'Mini Roll' },
+    { id: 'a5', name: 'A5 Half Page', icon: FileText, desc: 'Half Slip' },
   ];
 
   const handlePrint = () => {
@@ -30,31 +30,31 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
-      <div className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-navy-950/75 backdrop-blur-xs overflow-y-auto">
+      <div className="relative w-full max-w-5xl bg-beige-50 rounded-2xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-beige-200">
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50 no-print">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-teal-100 text-teal-700 rounded-lg">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-navy-800 bg-navy-950 text-beige-50 no-print">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-2 bg-navy-800 text-beige-300 rounded-xl border border-navy-700">
               <Printer className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-800">Print Preview & Multiple Formats</h2>
-              <p className="text-xs text-slate-500">Invoice: <strong className="text-teal-700">{invoice.invoiceNumber}</strong></p>
+              <h2 className="text-base sm:text-lg font-extrabold text-beige-50">Print Preview & Multiple Formats</h2>
+              <p className="text-xs text-beige-300/80">Invoice: <strong className="text-beige-100 font-mono">{invoice.invoiceNumber}</strong></p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-beige-500 hover:bg-beige-400 text-navy-950 text-xs sm:text-sm font-black rounded-xl shadow-md transition-all cursor-pointer"
             >
               <Printer className="w-4 h-4" />
               <span>Print Invoice</span>
             </button>
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-lg transition-colors"
+              className="p-1.5 text-beige-300 hover:text-beige-50 hover:bg-navy-800 rounded-xl transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -62,9 +62,9 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
         </div>
 
         {/* Format Selector Tabs */}
-        <div className="px-6 py-2.5 bg-slate-100 border-b border-slate-200 flex flex-wrap gap-2 items-center justify-between no-print">
-          <span className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Choose Template:</span>
-          <div className="flex gap-2">
+        <div className="px-3 sm:px-6 py-2.5 bg-beige-150 border-b border-beige-200 flex flex-wrap gap-1.5 sm:gap-2 items-center justify-between no-print">
+          <span className="text-[11px] font-extrabold text-navy-800 uppercase tracking-wide">Template:</span>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {formats.map((fmt) => {
               const Icon = fmt.icon;
               const isActive = selectedFormat === fmt.id;
@@ -72,15 +72,15 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
                 <button
                   key={fmt.id}
                   onClick={() => setSelectedFormat(fmt.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-teal-600 text-white shadow-sm ring-2 ring-teal-400/40'
-                      : 'bg-white text-slate-700 hover:bg-slate-200 border border-slate-200'
+                      ? 'bg-navy-900 text-beige-50 shadow-sm border border-navy-700'
+                      : 'bg-white text-navy-800 hover:bg-beige-200 border border-beige-300'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
                   <span>{fmt.name}</span>
-                  {isActive && <Check className="w-3 h-3 ml-0.5" />}
+                  {isActive && <Check className="w-3 h-3 ml-0.5 text-beige-300" />}
                 </button>
               );
             })}
@@ -88,10 +88,10 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
         </div>
 
         {/* Live Preview Paper Canvas */}
-        <div className="flex-1 overflow-y-auto p-6 bg-slate-200/70 flex justify-center items-start">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-6 bg-beige-200/50 flex justify-center items-start touch-scroll">
           <div
             id="printable-invoice"
-            className="shadow-lg transition-all duration-200 print:shadow-none"
+            className="shadow-xl transition-all duration-200 print:shadow-none bg-white rounded-xl overflow-hidden max-w-full"
           >
             {selectedFormat === 'a4' && <A4InvoiceTemplate invoice={invoice} store={store} />}
             {selectedFormat === 'thermal-80' && <Thermal80Template invoice={invoice} store={store} />}
@@ -101,22 +101,22 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between text-xs text-slate-500 no-print">
+        <div className="px-4 sm:px-6 py-3 border-t border-beige-200 bg-beige-100 flex items-center justify-between text-xs text-navy-700 font-medium no-print">
           <div>
-            Format active: <strong className="text-slate-800 uppercase">{selectedFormat}</strong>. Ready for printer.
+            Format active: <strong className="text-navy-950 uppercase font-bold">{selectedFormat}</strong>
           </div>
           <div className="flex gap-2">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-slate-600 hover:bg-slate-200 rounded-lg font-medium transition-colors"
+              className="px-3.5 py-1.5 text-navy-700 hover:bg-beige-200 rounded-xl font-bold transition-colors cursor-pointer"
             >
               Close
             </button>
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-5 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg shadow-sm transition-all"
+              className="flex items-center gap-1.5 px-4 py-1.5 bg-navy-900 hover:bg-navy-800 text-beige-50 font-black rounded-xl shadow-sm transition-all cursor-pointer border border-navy-700"
             >
-              <Printer className="w-4 h-4" />
+              <Printer className="w-4 h-4 text-beige-300" />
               <span>Print Now</span>
             </button>
           </div>
@@ -125,4 +125,3 @@ export default function PrintModal({ invoice, store, isOpen, onClose, initialFor
     </div>
   );
 }
-
